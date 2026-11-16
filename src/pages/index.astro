@@ -1,0 +1,28 @@
+---
+import '../styles/stellaris.css';
+import game from '../data/game.json';
+import App from '../components/App.jsx';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shipwright: Stellaris Fleet & Design Planner</title>
+  </head>
+  <body style={game.ui.background ? `--bg: url(${base}${game.ui.background})` : ''}>
+    <header class="topbar">
+      <h1>Shipwright <span>Fleet &amp; Design Planner</span></h1>
+      <div class="version">Game data: {game.version}</div>
+    </header>
+
+    <App client:only="react" />
+
+    <footer class="foot">
+      Data and icons are extracted from a local Stellaris install ({game.version}). Stellaris © Paradox Interactive.
+      Fan-made tool, not affiliated with Paradox. The combat model is an estimate, so check designs in-game.
+    </footer>
+  </body>
+</html>
