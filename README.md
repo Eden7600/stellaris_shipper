@@ -18,6 +18,19 @@ stat CSV, English localisation, and converts the DDS icons to PNG (no dependenci
 - `npm test`: parser and planner invariants
 - `npm run smoke [preset]`: prints designs and the fleet for early/mid/late tech
 
+## Deploy to Cloudflare Pages
+
+The site is fully static. The generated `src/data/game.json` and `public/icons/` are committed, so the Cloudflare
+build doesn't need a Stellaris install.
+
+- **Git integration (dashboard):** Workers & Pages → Create → Pages → connect this repo.
+  Set the build command to `npm run build` and the output directory to `dist`. Node comes from `.nvmrc`.
+- **CLI:** `npm run deploy` builds and runs `wrangler pages deploy`, using `wrangler.jsonc`. The first run asks
+  you to log in to Cloudflare and creates the `stellaris-shipper` project.
+
+`public/_headers` caches the hashed bundles forever and the icons for a week. A deployed site is public, and the
+icons and data are Paradox assets, so consider access controls (e.g. Cloudflare Access) if that matters.
+
 ## How the planner works (`src/lib/planner.js`)
 
 - Damage/day per weapon vs. the enemy: period = (cooldown + average windup) / 10 days (matches the wiki's

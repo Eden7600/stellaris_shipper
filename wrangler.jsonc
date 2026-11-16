@@ -1,0 +1,7 @@
+// Cloudflare Pages config, used by `npm run deploy` (wrangler pages deploy).
+// With the Git integration instead, set: build command `npm run build`, output directory `dist`.
+{
+  "name": "stellaris-shipper",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-11-15"
+}

@@ -12,7 +12,8 @@
     "astro": "astro",
     "extract": "node scripts/extract.mjs",
     "smoke": "node scripts/smoke.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "deploy": "npm run build && npx wrangler pages deploy"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.9",
