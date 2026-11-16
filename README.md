@@ -18,15 +18,17 @@ stat CSV, English localisation, and converts the DDS icons to PNG (no dependenci
 - `npm test`: parser and planner invariants
 - `npm run smoke [preset]`: prints designs and the fleet for early/mid/late tech
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare Workers
 
-The site is fully static. The generated `src/data/game.json` and `public/icons/` are committed, so the Cloudflare
-build doesn't need a Stellaris install.
+The site is fully static and deploys as an assets-only Worker (`wrangler.jsonc`, no server code). The generated
+`src/data/game.json` and `public/icons/` are committed, so the Cloudflare build doesn't need a Stellaris install.
 
-- **Git integration (dashboard):** Workers & Pages → Create → Pages → connect this repo.
-  Set the build command to `npm run build` and the output directory to `dist`. Node comes from `.nvmrc`.
-- **CLI:** `npm run deploy` builds and runs `wrangler pages deploy`, using `wrangler.jsonc`. The first run asks
-  you to log in to Cloudflare and creates the `stellaris-shipper` project.
+- `npm run deploy`: builds and runs `wrangler deploy`. The first run asks you to log in to Cloudflare and creates
+  the `stellaris-shipper` Worker.
+- `npm run preview:worker`: builds and serves it locally with `wrangler dev`, exactly as Cloudflare would.
+- **Workers Builds (Git integration):** Workers & Pages → Create → Workers → import this repo.
+  Set the build command to `npm run build` and the deploy command to `npx wrangler deploy`. Node comes from
+  `.nvmrc`.
 
 `public/_headers` caches the hashed bundles forever and the icons for a week. A deployed site is public, and the
 icons and data are Paradox assets, so consider access controls (e.g. Cloudflare Access) if that matters.
